@@ -1,0 +1,12 @@
+option_settings:
+  aws:elasticbeanstalk:container:python:
+    WSGIPath: application:app
+  aws:elasticbeanstalk:application:environment:
+    PYTHONPATH: "/var/app/current:$PYTHONPATH"
+  aws:elasticbeanstalk:environment:proxy:staticfiles:
+    /static: static/
+
+container_commands:
+  01_initdb:
+    command: "source /var/app/venv/*/bin/activate && python __init__.py"
+    leader_only: true
